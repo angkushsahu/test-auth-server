@@ -14,7 +14,7 @@ export class AuthService {
       return {
          expires: new Date(Date.now() + Number(process.env.COOKIE_EXPIRE) * 24 * 60 * 60 * 1000),
          secure: process.env.NODE_ENV === "production",
-         httpOnly: true,
+         // httpOnly: true,
          sameSite: false,
          domain: process.env["BROWSER_URL"],
       };
