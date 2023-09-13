@@ -16,7 +16,7 @@ export class AuthService {
          secure: process.env.NODE_ENV === "production",
          httpOnly: true,
          sameSite: false,
-         // domain: process.env["BROWSER_URL_1"],
+         domain: process.env["BROWSER_URL_1"],
       };
       console.log(cookieOptions);
 
