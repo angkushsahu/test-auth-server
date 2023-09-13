@@ -1,3 +1,4 @@
+import { CookieOptions } from "express";
 import { JwtService } from "@nestjs/jwt";
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
@@ -9,12 +10,13 @@ import { USER_MODEL, UserModelType } from "src/schema/user.schema";
 export class AuthService {
    constructor(@InjectModel(USER_MODEL) private readonly userModel: UserModelType, private readonly jwtService: JwtService) {}
 
-   cookieOptions() {
+   cookieOptions(): CookieOptions {
       return {
          expires: new Date(Date.now() + Number(process.env.COOKIE_EXPIRE) * 24 * 60 * 60 * 1000),
          secure: process.env.NODE_ENV === "production",
          httpOnly: true,
          sameSite: false,
+         domain: process.env["BROWSER_URL"],
       };
    }
 
