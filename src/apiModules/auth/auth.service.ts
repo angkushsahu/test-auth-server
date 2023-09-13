@@ -10,14 +10,17 @@ import { USER_MODEL, UserModelType } from "src/schema/user.schema";
 export class AuthService {
    constructor(@InjectModel(USER_MODEL) private readonly userModel: UserModelType, private readonly jwtService: JwtService) {}
 
-   cookieOptions(): CookieOptions {
-      return {
+   cookieOptions() {
+      const cookieOptions: CookieOptions = {
          expires: new Date(Date.now() + Number(process.env.COOKIE_EXPIRE) * 24 * 60 * 60 * 1000),
-         // secure: process.env.NODE_ENV === "production",
-         // httpOnly: true,
+         secure: process.env.NODE_ENV === "production",
+         httpOnly: true,
          sameSite: false,
-         domain: process.env["BROWSER_URL_1"],
+         // domain: process.env["BROWSER_URL_1"],
       };
+      console.log(cookieOptions);
+
+      return cookieOptions;
    }
 
    async signup(user: SignupDTO) {
